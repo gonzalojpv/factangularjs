@@ -2,13 +2,18 @@ var app = angular.module( 'facturacionApp', [
   'ngRoute',
   'facturacionApp.configuracion',
   'facturacionApp.mensajes',
-  'facturacionApp.notificaciones'
+  'facturacionApp.notificaciones',
+  'facturacionApp.clientes',
+  'facturacionApp.dashboardCtrl',
+  'facturacionApp.clientesCtrl',
  ] );
 
 app.controller( 'mainCtrl', [ '$scope', 'Configuracion', 'Mensajes', 'Notificaciones', function( $scope, Configuracion, Mensajes, Notificaciones ) {
   $scope.config = {};
   $scope.mensajes = Mensajes.mensajes;
   $scope.notificaciones = Notificaciones.notificaciones;
+  $scope.titulo = '';
+  $scope.subtitulo = '';
   $scope.usuario = {
     nombre:'Gonzalo'
   };
@@ -16,6 +21,20 @@ app.controller( 'mainCtrl', [ '$scope', 'Configuracion', 'Mensajes', 'Notificaci
   Configuracion.cargar().then( function() {
     $scope.config = Configuracion.config;
   } );
+
+  // ==================================
+  // Funciones Globales del scope
+  // ===================================
+  $scope.activar = function( menu, submenu, titulo, subtitulo ) {
+
+    $scope.titulo = titulo;
+    $scope.subtitulo = subtitulo;
+
+    $scope.mDashboard = '';
+    $scope.mClientes = '';
+
+    $scope[menu] = 'active';
+  }
 
 } ] );
 
@@ -26,7 +45,12 @@ app.controller( 'mainCtrl', [ '$scope', 'Configuracion', 'Mensajes', 'Notificaci
 app.config( [ '$routeProvider', function( $routeProvider ) {
   $routeProvider
     .when( '/', {
-      templateUrl: 'dashboard/dashboard.html'
+      templateUrl: 'dashboard/dashboard.html',
+      controller: 'dashboardCtrl'
+    } )
+    .when( '/clientes', {
+      templateUrl: 'clientes/clientes.html',
+      controller: 'clientesCtrl'
     } )
     .otherwise({
       redirectTo: '/'
