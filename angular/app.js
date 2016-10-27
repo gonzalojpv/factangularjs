@@ -48,7 +48,7 @@ app.config( [ '$routeProvider', function( $routeProvider ) {
       templateUrl: 'dashboard/dashboard.html',
       controller: 'dashboardCtrl'
     } )
-    .when( '/clientes', {
+    .when( '/clientes/:pag', {
       templateUrl: 'clientes/clientes.html',
       controller: 'clientesCtrl'
     } )
