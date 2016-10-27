@@ -11,7 +11,7 @@
         <h3 class="box-title">Bordered Table</h3>
         <div class="box-tools">
           <div class="input-group input-group-sm">
-            <a href=""><i class="fa fa-plus"> Agregar cliente</i></a>
+            <a ng-click="mostrarModal( {} )"><i class="fa fa-plus"> Agregar cliente</i></a>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
                 {{ cliente.telefono1 }}
               </td>
               <td>
-                <a href="" class="btn btn-warning">
+                <a ng-click="mostrarModal( cliente )" class="btn btn-warning">
                   <i class="fa fa-edit"></i>
                 </a>
               </td>
@@ -83,3 +83,5 @@
     <!-- /.box -->
   </div>
 </div>
+
+<div ng-include="'template/modal_cliente.html'"></div>

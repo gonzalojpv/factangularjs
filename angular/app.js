@@ -1,5 +1,5 @@
 var app = angular.module( 'facturacionApp', [
-  'ngRoute',
+  'ngRoute', 'jcs-autoValidate',
   'facturacionApp.configuracion',
   'facturacionApp.mensajes',
   'facturacionApp.notificaciones',
@@ -7,6 +7,16 @@ var app = angular.module( 'facturacionApp', [
   'facturacionApp.dashboardCtrl',
   'facturacionApp.clientesCtrl',
  ] );
+
+angular.module('jcs-autoValidate')
+ .run([
+     'defaultErrorMessageResolver',
+     function (defaultErrorMessageResolver) {
+         // To change the root resource file path
+         defaultErrorMessageResolver.setI18nFileRootPath('angular/lib');
+         defaultErrorMessageResolver.setCulture('es-CO');
+     }
+ ]);
 
 app.controller( 'mainCtrl', [ '$scope', 'Configuracion', 'Mensajes', 'Notificaciones', function( $scope, Configuracion, Mensajes, Notificaciones ) {
   $scope.config = {};

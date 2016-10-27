@@ -13,6 +13,18 @@ app.factory( 'Clientes', [ '$http', '$q', function( $http, $q ) {
     'total_paginas'  : 1,
     'paginas'	       : [],
 
+    guardar: function( cliente ) {
+      var d = $q.defer();
+
+      $http.post( 'php/clientes/post.clienteguardar.php', cliente )
+        .success( function( respuesta ) {
+          console.log( respuesta );
+          d.resolve();
+        } );
+
+      return d.promise;
+    },
+
     cargarPagina: function( pag ) {
       var d = $q.defer();
 
