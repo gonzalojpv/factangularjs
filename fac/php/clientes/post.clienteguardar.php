@@ -27,7 +27,23 @@ if ( isset( $request ['id'] ) ) {
 
 }
 else {
-  # code...
+  $sql = "insert into clientes (nombre, correo, zip, telefono1, telefono2, pais, direccion)
+    values (
+      '". $request['nombre'] ."',
+      '". $request['correo'] ."',
+      '". $request['zip'] ."',
+      '". $request['telefono1'] ."',
+      '". $request['telefono2'] ."',
+      '". $request['pais'] ."',
+      '". $request['direccion'] ."'
+    )";
+
+    $hecho = Database::ejecutar_idu( $sql );
+
+    if ( is_numeric( $hecho ) OR $hecho == TRUE )
+      $respuesta = array( 'err' => FALSE, 'Mensaje' => 'Registro insertado' );
+    else
+      $respuesta = array( 'err' => TRUE, 'Mensaje' => $hecho );
 }
 
 echo json_encode( $respuesta );

@@ -18,7 +18,7 @@ app.factory( 'Clientes', [ '$http', '$q', function( $http, $q ) {
 
       $http.post( 'php/clientes/post.clienteguardar.php', cliente )
         .success( function( respuesta ) {
-          console.log( respuesta );
+          self.cargarPagina( self.pag_actual );
           d.resolve();
         } );
 
